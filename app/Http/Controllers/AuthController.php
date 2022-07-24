@@ -55,7 +55,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['success' => true, 'message' => 'Successfully logged out']);
     }
 
     /**
@@ -93,7 +93,11 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(),400);
+            return response()->json([
+                'success' => false,
+                'message' => "Uno o más campos incorrectos",
+                'result' => $validator->errors()->toJson()
+            ], 400);
         }
 
         $user = User::create(array_merge(
@@ -102,8 +106,8 @@ class AuthController extends Controller
         ));
 
         return response()->json([
-            'message' => '¡Usuario registrado exitosamente!',
-            'user' => $user
+            'success' => true,
+            'message' => '¡Usuario registrado exitosamente!'
         ], 201);
     }
 }
