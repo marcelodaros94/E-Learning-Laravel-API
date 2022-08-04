@@ -95,7 +95,7 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json([
                 'success' => false,
-                'message' => "Uno o más campos incorrectos",
+                'message' => "Error. Revisa los datos ingresados.",
                 'result' => $validator->errors()->toJson()
             ], 400);
         }
