@@ -28,3 +28,9 @@ Route::group([
     Route::post('me', [ 'as' => 'me', 'uses' => 'App\Http\Controllers\AuthController@me']);
     Route::post('register', [ 'as' => 'register', 'uses' => 'App\Http\Controllers\AuthController@register']);
 });
+
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('course', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@index']);
+});
