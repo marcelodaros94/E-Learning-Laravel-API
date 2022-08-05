@@ -32,5 +32,6 @@ Route::group([
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
-    Route::get('course', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@index']);
+    Route::get('course', [ 'as' => 'courses', 'uses' => 'App\Http\Controllers\CursoController@index']);
+    Route::get('course/{id}', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@getWithDetail']);
 });

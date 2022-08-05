@@ -82,4 +82,15 @@ class CursoController extends Controller
     {
         //
     }
+
+    public function getWithDetail($id){
+        $curso=Curso::find($id);
+        $videos=$curso->videos;
+        $response=[ 
+            'id'=>$curso->id,
+            'name'=>$curso->name,
+            'sessions' => $videos
+        ];
+        return response()->json($response);
+    }
 }
