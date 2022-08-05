@@ -63,4 +63,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function progresos(){
+        return $this->hasMany('App\Models\Progreso');
+    }
+
+    public function detalleProgresos(){
+        return $this->progresos()
+        ->join('detalle_progresos', 'detalle_progresos.progreso_id', '=', 'progresos.id')
+        ->join('cursos', 'cursos.id', '=', 'progresos.curso_id')
+        ->select(\DB::raw("cursos.id, cursos.name, AVG(porcentaje) as porcentaje, video_cant"))
+        ->groupBy('cursos.name');
+    }
 }
