@@ -15,8 +15,9 @@ class CreateDetalleProgresosTable extends Migration
     {
         Schema::create('detalle_progresos', function (Blueprint $table) {
             $table->id();
-            $table->integer('video_num');
             $table->float('porcentaje');
+            $table->unsignedBigInteger('video_id');
+            $table->foreign('video_id')->references('id')->on('videos');
             $table->unsignedBigInteger('progreso_id');
             $table->foreign('progreso_id')->references('id')->on('progresos');
             $table->timestamps();

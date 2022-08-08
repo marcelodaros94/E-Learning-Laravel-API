@@ -27,6 +27,7 @@ Route::group([
     Route::post('refresh', [ 'as' => 'refresh', 'uses' => 'App\Http\Controllers\AuthController@refresh']);
     Route::post('me', [ 'as' => 'me', 'uses' => 'App\Http\Controllers\AuthController@me']);
     Route::post('register', [ 'as' => 'register', 'uses' => 'App\Http\Controllers\AuthController@register']);
+    Route::get('course_with_progress/{id}', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@getWithDetailByUser']);
 });
 
 Route::group([

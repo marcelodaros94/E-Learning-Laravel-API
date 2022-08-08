@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Curso;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CursoController extends Controller
@@ -82,10 +84,21 @@ class CursoController extends Controller
     {
         //
     }
-
+    
     public function getWithDetail($id){
         $curso=Curso::find($id);
         $videos=$curso->videos;
+        $response=[ 
+            'id'=>$curso->id,
+            'name'=>$curso->name,
+            'sessions' => $videos
+        ];
+        return response()->json($response);
+    }
+
+    public function getWithDetailByUser($id){
+        $curso=Curso::find($id);
+        $videos=$curso->videosWithProgress;
         $response=[ 
             'id'=>$curso->id,
             'name'=>$curso->name,
