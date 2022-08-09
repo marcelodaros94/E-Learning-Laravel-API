@@ -27,8 +27,9 @@ Route::group([
     Route::post('refresh', [ 'as' => 'refresh', 'uses' => 'App\Http\Controllers\AuthController@refresh']);
     Route::post('me', [ 'as' => 'me', 'uses' => 'App\Http\Controllers\AuthController@me']);
     Route::post('register', [ 'as' => 'register', 'uses' => 'App\Http\Controllers\AuthController@register']);
-    Route::get('course/{id}', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@getWithDetailByUser']);
+    Route::get('course/{id}', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@getWithDetail']);
     Route::put('progress', [ 'as' => 'progress', 'uses' => 'App\Http\Controllers\DetalleProgresoController@updateProgress']);
+    Route::post('progress', [ 'as' => 'progress', 'uses' => 'App\Http\Controllers\ProgresoController@takeCourse']);
 });
 
 Route::group([

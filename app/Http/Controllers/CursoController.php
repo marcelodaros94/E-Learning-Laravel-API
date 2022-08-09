@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Curso;
+use App\Models\Progreso;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -86,23 +87,25 @@ class CursoController extends Controller
     }
     
     public function getWithDetail($id){
-        $curso=Curso::find($id);
-        $videos=$curso->videos;
-        $response=[ 
-            'id'=>$curso->id,
-            'name'=>$curso->name,
-            'sessions' => $videos
-        ];
-        return response()->json($response);
-    }
 
-    public function getWithDetailByUser($id){
         $curso=Curso::find($id);
-        $videos=$curso->videosWithProgress;
+        $action='videos';
+        $taken=false;
+
+        if(auth()->user()){
+            //we find out if the user has taken that course
+            $my_course=Progreso::where('user_id', auth()->user()->id)->where('curso_id', $id)->get();
+            if(count($my_course)>0){
+                $action.='WithProgress';//then we get his progress too
+                $taken=true;
+            }
+        }
+
         $response=[ 
             'id'=>$curso->id,
             'name'=>$curso->name,
-            'sessions' => $videos
+            'taken'=>$taken,
+            'sessions' => $curso->$action
         ];
         return response()->json($response);
     }
