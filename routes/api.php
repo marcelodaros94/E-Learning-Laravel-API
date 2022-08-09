@@ -28,6 +28,7 @@ Route::group([
     Route::post('me', [ 'as' => 'me', 'uses' => 'App\Http\Controllers\AuthController@me']);
     Route::post('register', [ 'as' => 'register', 'uses' => 'App\Http\Controllers\AuthController@register']);
     Route::get('course/{id}', [ 'as' => 'course', 'uses' => 'App\Http\Controllers\CursoController@getWithDetailByUser']);
+    Route::put('progress', [ 'as' => 'progress', 'uses' => 'App\Http\Controllers\DetalleProgresoController@updateProgress']);
 });
 
 Route::group([
